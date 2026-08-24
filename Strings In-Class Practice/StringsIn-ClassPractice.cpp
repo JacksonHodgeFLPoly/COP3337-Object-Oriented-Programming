@@ -10,7 +10,7 @@ int main(void) {
     getline(std::cin, animal);
 
     std::string introduction = "Agent " + name;
-    introduction += ", also knows as The " + animal + ".";
+    introduction += ", also known as The " + animal + ".";
 
     std::cout << introduction << std::endl;
     std::cout << "Your identity contains " << introduction.size() << "characters.\n";
