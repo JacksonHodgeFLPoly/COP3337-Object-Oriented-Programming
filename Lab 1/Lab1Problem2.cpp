@@ -11,8 +11,8 @@ int main(void) {
 
     // Display first and last name
     std::cout << "-----------------" << "\n";
-    std::cout << "First name: " << firstName << "\n";
-    std::cout << "Last name: " << lastName << "\n";
+    std::cout << "First Name: " << firstName << "\n";
+    std::cout << "Last Name: " << lastName << "\n";
 
     // Initialize varibales for seconds spent studying
     int weeks = 16;
@@ -23,12 +23,12 @@ int main(void) {
 
     // Calculate seconds spent studying
     int totalLectures = (weeks * lecturesPerWeek) - canceledLectures;
-    int totalLectureMinutes = totalLectureMinutes * minutesPerLecture;
+    int totalLectureMinutes = totalLectures * minutesPerLecture;
     int studyMinutes = weeks * (studyPerWeek * 60);
     int totalSeconds = (totalLectureMinutes + studyMinutes) * 60;
 
     // Display seconds spent studying
-    std::cout << "I am supposed to spend " << totalSeconds << " seconds studying C++ programming.";
+    std::cout << "I am supposed to spend " << totalSeconds << " seconds studying C++ Programming.";
 
     return 0;
 }
