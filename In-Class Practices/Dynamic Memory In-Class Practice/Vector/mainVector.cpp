@@ -1,4 +1,9 @@
 #include "Vector.hpp"
+#include <iostream>
+
+void func(Vector vec) {
+    std::cout << "I will do nothing\n";
+}
 
 int main(void) {
     Vector v;
@@ -7,6 +12,7 @@ int main(void) {
     }
     
     v.print();
+    func(v);
 
     return 0;
 }
