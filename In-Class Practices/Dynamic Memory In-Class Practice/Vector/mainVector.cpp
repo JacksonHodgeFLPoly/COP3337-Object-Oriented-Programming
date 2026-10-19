@@ -7,10 +7,12 @@ void func(Vector vec) {
 
 int main(void) {
     Vector v;
-    for (int i = 0; i < 5; i++) {
+    std::cout << v.empty() << std::endl;
+    for (int i = 0; i < 50; i++) {
         v.push_back(i);
     }
     
+    std::cout << v.at(2) << std::endl;
     v.print();
     func(v);
 

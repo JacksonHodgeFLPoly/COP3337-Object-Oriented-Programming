@@ -11,9 +11,9 @@ public:
     void push_back(int val);
     void print() const;
 
-    void pop_back();
-    bool empty() const;
-    int at(int index) const;
+    void pop_back();            // Remoce the last element
+    bool empty() const;         
+    int at(int index) const;    // Return an element at index
 
 private:
     bool full() const;

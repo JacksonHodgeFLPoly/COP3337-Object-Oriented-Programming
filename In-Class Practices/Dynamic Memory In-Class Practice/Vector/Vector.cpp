@@ -60,3 +60,25 @@ void Vector::allocateMemory(int new_capacity) {
     // Deallocate the old memory
     delete [] old_data;
 }
+
+void Vector::pop_back() {
+    if (empty()) {
+        return;
+    }
+    if (size < capacity / 2) {
+        allocateMemory(capacity / 2);
+    }
+    size--;
+}
+
+bool Vector::empty() const {
+    return size == 0;
+}        
+
+int Vector::at(int index) const {
+    if (index < 0 || index >= size) {
+        std::cout << "at: out of boundaries\n";
+        return -9999999;
+    }
+    return data[index];
+}
