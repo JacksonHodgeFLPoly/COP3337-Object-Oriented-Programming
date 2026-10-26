@@ -5,14 +5,12 @@
 template <typename T>
 Vector<T>::Vector(int capacity) : size(0), capacity(capacity) {
     data = new T[capacity];
-    std::cout << "constructor " << this << std::endl;
 }
 
 // Vector::Vector(const Vector& other) : size(other.size), capacity(other.capacity) {
-//     std::cout << "copy constructor " << this << std::endl;
 //     data = new int[capacity];
 
-//     // Copy the elements from the vector other
+//     // Copy the data from the vector other
 //     for (int i = 0; i < size; i++) {
 //         data[i] = other.data[i];
 //     }
@@ -20,7 +18,6 @@ Vector<T>::Vector(int capacity) : size(0), capacity(capacity) {
 
 template <typename T>
 Vector<T>::~Vector() {
-    std::cout << "destructor " << this << std::endl;
     if (data) {
         delete [] data;
     }
@@ -29,7 +26,7 @@ Vector<T>::~Vector() {
 template <typename T>
 void Vector<T>::print() const {
     std::cout << "[ ";
-    // Print the elements
+    // Print the data
     for (int i = 0; i < size; i++) {
         std::cout << data[i] << ' ';
     }
@@ -44,17 +41,11 @@ void Vector<T>::push_back(const T& val) {
     
     data[size] = val;
     size++;
-
 }
 
 template <typename T>
 bool Vector<T>::full() const {
     return size == capacity;
-}
-
-template <typename T>
-bool Vector<T>::empty() const {
-    return size == 0;
 }
 
 template <typename T>
@@ -66,7 +57,7 @@ void Vector<T>::allocateMemory(int new_capacity) {
     // Allocate the new memory
     data = new T[capacity];
     
-    // Copy the elements
+    // Copy the data
     for (int i = 0; i < size; i++) {
         data[i] = old_data[i];
     }
@@ -85,21 +76,21 @@ void Vector<T>::pop_back() {
 }
 
 template <typename T>
-T& Vector<T>::at(int index) const {
-    if (index < 0) {
-        index = size + index;
-    }
-
-    if (index < 0 || index >= size) {
-        std::cout << "at: out of boundaries\n";
-        return INT_MIN;
-    }
-    return data[index];
+bool Vector<T>::empty() const {
+    return size == 0;
 }
 
 template <typename T>
-int Vector<T>::getSize() const {
-    return size;
+const T& Vector<T>::at(int index) const {
+    if (index < size * -1 || index > size - 1) {
+        throw "Invalid index";
+    }
+    if (index >= 0) {
+        return data[index];
+    }
+    else {
+        return data[size - (index * -1)];
+    }
 }
 
 template <typename T>
@@ -109,44 +100,69 @@ int Vector<T>::getCapacity() const {
 
 template <typename T>
 void Vector<T>::clear() {
-    delete[] data;
-    data = new int[10];
-    capacity = 10;
+    delete [] data;
     size = 0;
+    capacity = 10;
+    
+    data = new T[capacity];
+}
+
+template <typename T>
+int Vector<T>::getSize() const {
+    return size;
 }
 
 template <typename T>
 void Vector<T>::push_front(const T& value) {
-    insert(0, value);
+    if (size >= capacity) {
+        allocateMemory(capacity * 2);
+    }
+    for (int i = size; i >= 1; i--) {
+        data[i] = data[i - 1]; 
+    }
+    data[0] = value;
+    size++;
 }
 
 template <typename T>
 void Vector<T>::insert(int pos, const T& value) {
-    if (pos < 0) {
-        pos = size + (pos + 1);
+    if (size == 0 && pos == -1) {
+        push_back(value);
+        return;
     }
-
-    if (full()) {
+    if (pos < size * -1  || pos > size - 1) {
+        throw "Invalid index";
+    }
+    if (size >= capacity) {
         allocateMemory(capacity * 2);
     }
-
-    for (int i = size; i > pos; i--) {
-        data[i] = data[i - 1];
+    if (pos < 0) {
+        pos = size - (pos * -1);
     }
-
+    for (int i = size; i >= pos; i--) {
+        data[i] = data[i - 1]; 
+    }
     data[pos] = value;
     size++;
 }
 
 template <typename T>
-void Vector<T>::resize(int new_size, const T& value) {
-    if (new_size > size) {
-        
+void Vector<T>::resize(int new_size, const T& val) {
+    if (new_size < 0) {
+        return;
     }
-    if (new_size < size) {
-        
+    else if (new_size > capacity) {
+        allocateMemory(new_size * 2);
     }
-    if (new_size > capacity) {
-        
+
+    for (int i = size; i < new_size; i++) {
+        data[i] = val;
     }
+
+    size = new_size;
+}
+
+template<typename T>
+void Vector<T>::operator=(const Vector<T>& other) {
+    
 }

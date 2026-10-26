@@ -2,15 +2,15 @@
 #include <iostream>
 
 int main(void) {
-    // Create a Vector object dynamically
-    Vector<double> *mvPtr = new Vector<double>(10);
+    // // Create a Vector object dynamically
+    // Vector<double> *mvPtr = new Vector<double>(10);
 
-    for (int i = 0; i < 100; i++) {
-        mvPtr->push_back(static_cast<double>(i) / 10 + i);
-    }
+    // for (int i = 0; i < 100; i++) {
+    //     mvPtr->push_back(i * (static_cast<double>(i) / 10));
+    // }
 
-    // Test clear
-    mvPtr->print();
+    // // Test clear
+    // mvPtr->print();
     // mvPtr->clear();
     // std::cout << mvPtr->getCapacity() << std::endl;
     // mvPtr->print();
@@ -35,7 +35,25 @@ int main(void) {
     //     std::cout << mvPtr->at(i) << ' ' << mvPtr->at(-(i + 1)) << std::endl;
     // }
     
-    delete mvPtr;
+    // mvPtr->resize(100, 0);
+    // mvPtr->print();
+    // mvPtr->resize(1, 0);
+    // mvPtr->print();
+    // mvPtr->resize(100, 0);
+    // mvPtr->print();
+
+
+    // delete mvPtr;
+
+    Vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+
+    Vector<int> v2;
+    v2 = v;
+
+    v2.print();
     
     return 0;
 }
