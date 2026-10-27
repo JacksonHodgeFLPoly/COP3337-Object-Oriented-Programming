@@ -51,9 +51,10 @@ int main(void) {
     v.push_back(30);
 
     Vector<int> v2;
-    v2 = v;
+    Vector<int> v3;
+    v3 = v2 = v;         // Assignment operator v2.operator=(v);
 
-    v2.print();
+    v3.print();
     
     return 0;
 }

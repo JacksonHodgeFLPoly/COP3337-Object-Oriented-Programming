@@ -163,6 +163,16 @@ void Vector<T>::resize(int new_size, const T& val) {
 }
 
 template<typename T>
-void Vector<T>::operator=(const Vector<T>& other) {
+Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
+    size = other.size;
+    capacity = other.capacity;
+
+    delete [] data;
     
+    data = new T[capacity];
+    for (int i = 0; i < size; i++) {
+        data[i] = other.data[i];
+    }
+
+    return *this;
 }

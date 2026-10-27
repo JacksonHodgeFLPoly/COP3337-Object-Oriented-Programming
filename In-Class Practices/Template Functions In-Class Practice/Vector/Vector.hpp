@@ -26,15 +26,9 @@ public:
     void push_front(const T& value);
     void insert(int pos, const T& value);
 
-    /*
-        if new_size > size - add new elements initialized with val
-        if new_size < size - remove extra elements from the end
-        if new_size > capacity - allocate new memory
-    
-    */
     void resize(int new_size, const T& val);
 
-    void operator=(const Vector<T>& other);
+    Vector<T>& operator=(const Vector<T>& other);
 
 private:
     void allocateMemory(int new_capacity);      // Allocate a new array of a given capacity
