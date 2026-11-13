@@ -5,11 +5,14 @@ class Character {
 public:
     Character(const std::string& name, int health);
     ~Character();
-    std::string name;
+    
     int health;
+
+    std::string getName() const;
     
     virtual void printInfo() const;
 private:
+    std::string name;
 };
 
 class Warrior : public Character {
@@ -17,7 +20,8 @@ public:
     Warrior(const std::string& name, int health, int armor);
     ~Warrior();
     int armor;
-    
+
+    void battleCry() const;
     void printInfo() const;
 private:
 };
@@ -28,6 +32,7 @@ public:
     int level;
     
     void printInfo() const;
+
 private:
 };
 
@@ -56,7 +61,10 @@ int main(void) {
 
     for (int i = 0; i < 3; i++) {
         characters[i]->printInfo();
+        std::cout << "-------------" << std::endl;
     }
+
+    ew.battleCry();
 
     delete character;
     return 0;
@@ -104,4 +112,12 @@ void EliteWarrior::printInfo() const {
     // Call the base class method
     Warrior::printInfo();
     std::cout << "Level: " << level << std::endl;
+}
+
+void Warrior::battleCry() const {
+    std::cout << name << " roars!" << std::endl;
+}
+
+std::string Character::getName() const {
+    return name;
 }
